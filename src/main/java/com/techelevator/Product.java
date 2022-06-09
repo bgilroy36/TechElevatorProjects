@@ -12,7 +12,7 @@ public class Product extends Inventory {
 //    private List<String> prodList = new ArrayList<>(); >> don't think we need it
 
 
-        public Product(String name, double price, String type, String slot) {
+        public Product(String slot, String name, double price, String type) {
             this.name = name;
             this.price = price;
             this.type = type;

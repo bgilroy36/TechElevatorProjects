@@ -25,7 +25,10 @@ public class Inventory {
     public void stockInventory() {
         try (Scanner invList = new Scanner(vendMachineCSV);) {
             while (invList.hasNextLine()) {
-                
+                String invString = invList.nextLine();
+               String [] itemArray = invString.split("|");
+               inventoryMap.put(itemArray[0], )
+
             }
 
 
