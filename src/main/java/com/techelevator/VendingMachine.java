@@ -2,34 +2,38 @@ package com.techelevator;
 
 public class VendingMachine {
 
-    private int moneyFed;
-    private int moneyInMachine;
-    private int change;
-    private int calculateChange; //Do we need this?
+    private double moneyFed;
+    private double moneyInMachine;
+    private double change;
+    private double cost;
 
-    public VendingMachine(int moneyFed, int moneyInMachine, int change, int calculateChange) {
+    public VendingMachine(double moneyFed, double moneyInMachine, double change, double cost) {
         this.moneyFed = moneyFed;
         this.moneyInMachine = moneyInMachine;
         this.change = change;
-        this.calculateChange = calculateChange;
+        this.cost = cost;
+
 
     }
 
-        public int getMoneyFed(){
-            return moneyFed;
-        }
+    public double getMoneyFed() {
+        return moneyFed;
+    }
 
-        public int getMoneyInMachine(){
+    public double getMoneyInMachine() {
         return moneyInMachine;
 
     }
 
-    public int getChange(){
+    public double getChange() {
         return change;
     }
 
-    public int getCalculateChange(){
+    public double makeChange(double moneyFed,double cost) {
+        change = moneyFed - cost;
         return change;
     }
+
+
 }
 

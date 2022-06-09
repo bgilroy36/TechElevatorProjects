@@ -1,14 +1,18 @@
 package com.techelevator;
 
-public class Product {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Product extends Inventory {
 
     private String name;
-    private int price;
+    private double price;
     private String type;
     private String slot;
+//    private List<String> prodList = new ArrayList<>(); >> don't think we need it
 
 
-        public Product(String name, int price, String type, String slot) {
+        public Product(String name, double price, String type, String slot) {
             this.name = name;
             this.price = price;
             this.type = type;
@@ -19,7 +23,7 @@ public class Product {
             return name;
         }
 
-        public int getprice(){
+        public double getPrice(){
             return price;
         }
 
@@ -31,6 +35,7 @@ public class Product {
             return slot;
             }
 
+//        public List<String> getProdList() {return prodList;}
 
     }
 
