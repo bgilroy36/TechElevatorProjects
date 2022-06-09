@@ -1,6 +1,10 @@
 package com.techelevator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class VendingMachine {
 
@@ -17,8 +21,12 @@ public class VendingMachine {
     public static int dimeBack = 0;
     public static int nickelBack = 0;
 
+    private Map<String, Product> inventoryMap = new TreeMap<>();
+    File vendMachineCSV = new File("vendingmachine.csv");
+
+    }
 Inventory inventory = new Inventory();
-public void snackItem = inventory.loadInventory();
+
 
     public Inventory getInventory() {
         return inventory;
@@ -34,8 +42,10 @@ Scanner userInput = new Scanner(System.in);
         this.change = change;
         this.cost = cost;
 
-
     }
+
+    public Map<String, Product> getInventoryMap() {
+        return inventoryMap; }
 
     public double getMoneyFed() {
         return moneyFed;
@@ -71,6 +81,23 @@ Scanner userInput = new Scanner(System.in);
 
 return dueBack;
         }
+//    public void snackItem = VendingMachine.loadInventory();
+//
+    public void loadInventory() {
+        try (Scanner invList = new Scanner(vendMachineCSV);) {
+            while (invList.hasNextLine()) {
+                String invString = invList.nextLine();
+                String [] itemArray = invString.split("\\|");
+                Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                inventoryMap.put(itemArray[0], product);
+
+            }
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     }
 
