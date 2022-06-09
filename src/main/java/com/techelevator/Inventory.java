@@ -22,12 +22,13 @@ public class Inventory {
         return inventoryMap;
     }
 
-    public void stockInventory() {
+    public void loadInventory() {
         try (Scanner invList = new Scanner(vendMachineCSV);) {
             while (invList.hasNextLine()) {
                 String invString = invList.nextLine();
-               String [] itemArray = invString.split("|");
-               inventoryMap.put(itemArray[0], )
+               String [] itemArray = invString.split("\\|");
+               Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+               inventoryMap.put(itemArray[0], product);
 
             }
 

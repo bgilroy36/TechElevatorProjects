@@ -10,10 +10,13 @@ public class VendingMachineCLI {
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT };
 
 	private Menu menu;
+	private VendingMachine vendingMachine;
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
+
+	public
 
 	public void run() {
 		while (true) {
@@ -21,6 +24,7 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
@@ -34,4 +38,17 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
+
+	public void displayItems() {
+		System.out.println("Options include: " + vendingMachine.getInventory() );
+		for (String snack : ());
+		System.out.println();
+				//create an instance of a vending machine with a member variable of Inventory
+	}
+
+
+
+
 }
+
+
