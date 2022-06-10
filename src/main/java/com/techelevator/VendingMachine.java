@@ -22,6 +22,7 @@ public class VendingMachine {
     public static int nickelBack = 0;
 
     private Map<String, Product> inventoryMap = new TreeMap<>();
+
     File vendMachineCSV = new File("vendingmachine.csv");
 
     }
