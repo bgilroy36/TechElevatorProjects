@@ -25,17 +25,14 @@ public class VendingMachine {
 
     File vendMachineCSV = new File("vendingmachine.csv");
 
-    }
-Inventory inventory = new Inventory();
+}
+    Inventory inventory = new Inventory();
 
 
     public Inventory getInventory() {
         return inventory;
     }
-
-
-
-Scanner userInput = new Scanner(System.in);
+    Scanner userInput = new Scanner(System.in);
 
     public VendingMachine(double moneyFed, double moneyInMachine, double change, double cost) {
         this.moneyFed = moneyFed;
@@ -46,7 +43,9 @@ Scanner userInput = new Scanner(System.in);
     }
 
     public Map<String, Product> getInventoryMap() {
-        return inventoryMap; }
+        return inventoryMap;
+    }
+
 
     public double getMoneyFed() {
         return moneyFed;
@@ -56,41 +55,42 @@ Scanner userInput = new Scanner(System.in);
         return moneyInMachine;
     }
 
-        public double getChange () {
-            return change;
+    public double getChange() {
+        return change;
+    }
+
+    public double makeChange(double moneyFed, double cost) {
+        double dueBack = moneyFed - cost;
+        if (dueBack <= 0) {
+            return 0;
+        } else {
+
+            int balance = (int) (dueBack * 100);
+
+            quarterBack = balance / QUARTER;
+            balance = balance % QUARTER;
+
+            dimeBack = balance / DIME;
+            balance = balance % DIME;
+
+            nickelBack = balance / NICKEL;
+            balance = balance % NICKEL;
+
+            System.out.println(String.format("Dispensing change, %d quarters, %d dimes, %d nickels", quarterBack, dimeBack, nickelBack));
         }
 
-        public double makeChange ( double moneyFed, double cost){
-            double dueBack = moneyFed - cost;
-            if (dueBack <= 0) {
-                return 0;
-            } else {
+        return dueBack;
+    }
 
-                int balance = (int) (dueBack * 100);
-
-                quarterBack = balance / QUARTER;
-                balance = balance % QUARTER;
-
-                dimeBack = balance / DIME;
-                balance = balance % DIME;
-
-                nickelBack = balance / NICKEL;
-                balance = balance % NICKEL;
-
-                System.out.println(String.format("Dispensing change, %d quarters, %d dimes, %d nickels", quarterBack, dimeBack, nickelBack));
-            }
-
-return dueBack;
-        }
-//    public void snackItem = VendingMachine.loadInventory();
+    //    public void snackItem = VendingMachine.loadInventory();
 //
     public void loadInventory() {
         try (Scanner invList = new Scanner(vendMachineCSV);) {
             while (invList.hasNextLine()) {
                 String invString = invList.nextLine();
-                String [] itemArray = invString.split("\\|");
+                String[] itemArray = invString.split("\\|");
                 Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
-                inventoryMap.put(itemArray[0], product);
+                getInventoryMap().put(itemArray[0], product);
 
             }
 
@@ -100,7 +100,7 @@ return dueBack;
         }
     }
 
-    }
+}
 
 
 
