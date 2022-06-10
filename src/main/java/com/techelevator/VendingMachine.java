@@ -92,12 +92,15 @@ public class VendingMachine {
 
 
     public void feedMoney(int moneyInserted) {
-        if (moneyInserted >= 13) {
+        if (moneyInserted >= 1) {
             this.moneyInMachine = (int) (getMoneyInMachine() + moneyInserted);
             System.out.println("Thank you for inserting money: $" + moneyInserted + ".00");
 
         }
+
     }
+
+
 }
 
 

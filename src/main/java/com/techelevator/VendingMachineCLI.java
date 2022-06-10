@@ -80,7 +80,8 @@ public class VendingMachineCLI {
 
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.exit(1);
-				}
+				}  if (choice2.equals){
+
 
 			}
 		}

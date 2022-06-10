@@ -7,6 +7,8 @@ import java.util.*;
 public class Inventory {
     private static final int MAXIMUM_AMOUNT = 5;
     private boolean isSoldOut;
+    private int availableQuantity;
+
 
 
     public int getMaximumAmount() {
@@ -32,6 +34,7 @@ public class Inventory {
                 String[] itemArray = invString.split("\\|");
                 Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
                 inventoryMap.put(itemArray[0], product);
+               availableQuantity = MAXIMUM_AMOUNT;
             }
 
         } catch (FileNotFoundException e) {
