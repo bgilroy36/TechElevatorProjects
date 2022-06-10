@@ -15,47 +15,44 @@ public class VendingMachineCLI {
 
 	private Menu menu;
 	private VendingMachine vendingMachine;
-	File vendMachineCSV = new File("vendingmachine.csv");
-	public VendingMachineCLI(Menu menu) {
+	public VendingMachineCLI(Menu menu, VendingMachine vendingMachine) {
 		this.menu = menu;
+		this.vendingMachine = vendingMachine;
 	}
 
 	public Map<String, Product> getInventoryMap() {return getInventoryMap();}
+
+	public static void main (String[]args){
+		Menu menu = new Menu(System.in, System.out);
+		VendingMachine vendingMachine = new VendingMachine();
+		vendingMachine.loadInventory();
+		VendingMachineCLI cli = new VendingMachineCLI(menu, vendingMachine);
+		cli.run();
+	}
+
+
+
 	public void run() {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				//display items here
-
+				Map<String, Product> displayItems = vendingMachine.getInventoryMap();
+				for (Map.Entry<String, Product> itemEntry : displayItems.entrySet()) {
+					Product product = itemEntry.getValue();
+					System.out.printf("%s %-20.20s %.2f %s%n", itemEntry.getKey(), product.getName(), product.getPrice(), product.getType());
+				}
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				System.exit(1);
 			}
-	public void loadInventory() {
-		try (Scanner invList = new Scanner(vendMachineCSV);) {
-			while (invList.hasNextLine()) {
-				String invString = invList.nextLine();
-				String[] itemArray = invString.split("\\|");
-				Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
-				getInventoryMap().put(itemArray[0], product);
-			}
 
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
-
-			}
 		}
 	}
 
-		public static void main (String[]args){
-			Menu menu = new Menu(System.in, System.out);
-			VendingMachineCLI cli = new VendingMachineCLI(menu);
-			cli.run();
-		}
+
 
 //	public void displayItems() {
 //		System.out.println("Options include: " + vendingMachine.getInventory() );
@@ -64,20 +61,19 @@ public class VendingMachineCLI {
 		//create an instance of a vending machine with a member variable of Inventory
 
 
-	public String displayItems() {
-		String result = "";
-		for (String key : getInventoryMap().keySet()) {
-			Product display = getInventoryMap().get(key);
-			String formattedName = String.format("%-20s", display.getProduct().getName());
-			result += display.getSlot() + " " + formattedName + " " + display.getProduct().getPrice() + "  Qty: "
-					+ display.getQuantity() + "\n";
+//	public String displayItems() {
+//		String result = "";
+//		for (String key : getInventoryMap().keySet()) {
+//			Product display = getInventoryMap().get(key);
+//			String formattedName = String.format("%-20s", display.getProduct().getName());
+//			result += display.getSlot() + " " + formattedName + " " + display.getProduct().getPrice() + "  Qty: "
+//					+ display.getQuantity() + "\n";
 
-		}
+//		}
 }
 
-	}
+
 //	VendingMachine vendingMachine = new VendingMachine();
 //	File file = vendingMachine.getInventory().vendMachineCSV;
 //	Map<String, Product> inventoryMap = vendingMachine.getInventory(file);
 
-	}

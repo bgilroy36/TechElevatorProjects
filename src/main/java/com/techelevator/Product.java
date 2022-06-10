@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Product {
 
@@ -18,6 +19,7 @@ public class Product {
             this.type = type;
             this.slot = slot;
         }
+
 
         public String getName(){
             return name;
@@ -53,8 +55,30 @@ public class Product {
                 return "";
             }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.price, price) == 0 && Objects.equals(name, product.name) && Objects.equals(type, product.type) && Objects.equals(slot, product.slot);
+    }
 
-//        public List<String> getProdList() {return prodList;}
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, type, slot);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", slot='" + slot + '\'' +
+                '}';
+    }
+
+    //        public List<String> getProdList() {return prodList;}
 
     }
 

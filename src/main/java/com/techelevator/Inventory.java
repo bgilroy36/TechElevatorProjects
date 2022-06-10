@@ -17,6 +17,33 @@ public class Inventory {
         return isSoldOut;
     }
 
+    File vendMachineCSV = new File("vendingmachine.csv");
+
+
+
+    private Map<String, Product> inventoryMap = new TreeMap<>();
+
+
+
+    public void loadInventory() {
+        try (Scanner invList = new Scanner(vendMachineCSV);) {
+            while (invList.hasNextLine()) {
+                String invString = invList.nextLine();
+                String[] itemArray = invString.split("\\|");
+                Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                inventoryMap.put(itemArray[0], product);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+    public Map<String, Product> getInventoryMap() {
+        return inventoryMap;
+    }
+
 
 
 

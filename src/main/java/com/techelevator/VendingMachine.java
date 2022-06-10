@@ -17,35 +17,18 @@ public class VendingMachine {
     public final int DIME = 10;
     public final int NICKEL = 5;
 
-    public static int quarterBack = 0;
-    public static int dimeBack = 0;
-    public static int nickelBack = 0;
+    public int quarterBack = 0;
+    public int dimeBack = 0;
+    public int nickelBack = 0;
 
-    private Map<String, Product> inventoryMap = new TreeMap<>();
 
-    File vendMachineCSV = new File("vendingmachine.csv");
-
-}
+    Scanner userInput = new Scanner(System.in);
     Inventory inventory = new Inventory();
 
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-    Scanner userInput = new Scanner(System.in);
-
-    public VendingMachine(double moneyFed, double moneyInMachine, double change, double cost) {
-        this.moneyFed = moneyFed;
-        this.moneyInMachine = moneyInMachine;
-        this.change = change;
-        this.cost = cost;
+    public VendingMachine() {
 
     }
-
-    public Map<String, Product> getInventoryMap() {
-        return inventoryMap;
-    }
-
 
     public double getMoneyFed() {
         return moneyFed;
@@ -58,6 +41,25 @@ public class VendingMachine {
     public double getChange() {
         return change;
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Map<String, Product> getInventoryMap() {
+        return inventory.getInventoryMap();
+    }
+
+
+    public void setMoneyFed() {
+        this.moneyFed = moneyFed;
+    }
+
+    public void loadInventory() {
+       inventory.loadInventory();
+    }
+
+
 
     public double makeChange(double moneyFed, double cost) {
         double dueBack = moneyFed - cost;
@@ -82,27 +84,13 @@ public class VendingMachine {
         return dueBack;
     }
 
-    //    public void snackItem = VendingMachine.loadInventory();
-//
-    public void loadInventory() {
-        try (Scanner invList = new Scanner(vendMachineCSV);) {
-            while (invList.hasNextLine()) {
-                String invString = invList.nextLine();
-                String[] itemArray = invString.split("\\|");
-                Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
-                getInventoryMap().put(itemArray[0], product);
-
-            }
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    public void feedMoney() {
+        System.out.println("");
+       // int moneyInserted =
     }
 
+
 }
-
-
 
 
 
