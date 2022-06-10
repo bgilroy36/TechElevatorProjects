@@ -1,15 +1,12 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class VendingMachine {
 
     private double moneyFed;
-    private double moneyInMachine;
+    private int moneyInMachine;
     private double change;
     private double cost;
 
@@ -22,7 +19,7 @@ public class VendingMachine {
     public int nickelBack = 0;
 
 
-    Scanner userInput = new Scanner(System.in);
+
     Inventory inventory = new Inventory();
 
 
@@ -34,7 +31,7 @@ public class VendingMachine {
         return moneyFed;
     }
 
-    public double getMoneyInMachine() {
+    public int getMoneyInMachine() {
         return moneyInMachine;
     }
 
@@ -61,6 +58,7 @@ public class VendingMachine {
 
 
 
+
     public double makeChange(double moneyFed, double cost) {
         double dueBack = moneyFed - cost;
         if (dueBack <= 0) {
@@ -83,14 +81,30 @@ public class VendingMachine {
 
         return dueBack;
     }
-
-    public void feedMoney() {
-        System.out.println("");
-       // int moneyInserted =
+    public int getNewBalance() {
+        return newBalance;
     }
 
+    private int newBalance = 0;
+    private int availableBalance;
+    Scanner userInput = new Scanner(System.in);
 
+
+
+    public void feedMoney(int moneyInserted) {
+        if (moneyInserted >= 13) {
+            this.moneyInMachine = (int) (getMoneyInMachine() + moneyInserted);
+            System.out.println("Thank you for inserting money: $" + moneyInserted + ".00");
+
+        }
+    }
 }
+
+
+
+
+
+
 
 
 
