@@ -15,7 +15,10 @@ public class VendingMachineCLI {
 	private static final String SUB_MENU_SELECT_PRODUCT = "Select Product";
 	private static final String SUB_MENU_FINISH_TRANSACTION = "Finish Transaction";
 	private static final String[] SUB_MENU_OPTIONS = {SUB_MENU_FEED_MONEY, SUB_MENU_SELECT_PRODUCT, SUB_MENU_FINISH_TRANSACTION};
+
 	Scanner userInput = new Scanner(System.in);
+
+	private String selection;
 
 	private Menu menu;
 	private VendingMachine vendingMachine;
@@ -29,6 +32,14 @@ public class VendingMachineCLI {
 
 	public Map<String, Product> getInventoryMap() {
 		return getInventoryMap();
+	}
+
+	public Scanner getUserInput() {
+		return userInput;
+	}
+
+	public String getSelection() {
+		return selection;
 	}
 
 	public static void main(String[] args) {
@@ -56,10 +67,9 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 				String choice2 = (String) menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
-				if (choice2.toUpperCase() == "R") ;
-				{
+				if (choice2.toUpperCase() == "R");
+				{break;}
 
-				}
 				if (choice2.equals(SUB_MENU_FEED_MONEY)) {
 					while (true) {
 						try {
@@ -78,10 +88,17 @@ public class VendingMachineCLI {
 						}
 					}
 
-				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				} if (choice2.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.exit(1);
-				}  if (choice2.equals){
 
+					if (choice2.equals(SUB_MENU_SELECT_PRODUCT)){
+						while (true) {
+							try {
+								System.out.println("Please select the product you want using the slot location >>>");
+								String selection = userInput.nextLine();
+								//select product method where we get key and stuff
+							}
+						}
 
 			}
 		}
@@ -111,3 +128,5 @@ public class VendingMachineCLI {
 //	File file = vendingMachine.getInventory().vendMachineCSV;
 //	Map<String, Product> inventoryMap = vendingMachine.getInventory(file);
 
+
+	}

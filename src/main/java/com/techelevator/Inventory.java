@@ -7,6 +7,11 @@ import java.util.*;
 public class Inventory {
     private static final int MAXIMUM_AMOUNT = 5;
     private boolean isSoldOut;
+
+    public int getAvailableQuantity() {
+        return availableQuantity;
+    }
+
     private int availableQuantity;
 
 
@@ -47,7 +52,11 @@ public class Inventory {
         return inventoryMap;
     }
 
-
+    public boolean hasQty() {
+        if (this.availableQuantity >= 1) {
+            return true;
+        } else {
+            return false;
 
 
 }

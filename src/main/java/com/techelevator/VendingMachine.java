@@ -17,10 +17,14 @@ public class VendingMachine {
     public int quarterBack = 0;
     public int dimeBack = 0;
     public int nickelBack = 0;
+    Product selectedItem;
 
 
 
-    Inventory inventory = new Inventory();
+
+
+    Inventory inventory = new Inventory;
+    VendingMachineCLI vmCLI = new VendingMachineCLI;
 
 
     public VendingMachine() {
@@ -97,11 +101,25 @@ public class VendingMachine {
             System.out.println("Thank you for inserting money: $" + moneyInserted + ".00");
 
         }
+         }
+
+
+public void selectProduct() {
+      if (getInventoryMap().containsKey(vmCLI.getSelection())) {
+         selectedItem = getInventoryMap().get(vmCLI.getSelection());
+          //if (vmCLI.getSelection());
+      }
+
+        if (inventory.hasQty() && moneyInMachine >= selectedItem.getPrice()) {
+            int subtractQty = inventory.getAvailableQuantity() -1;
+        }
+        }
+
 
     }
 
 
-}
+
 
 
 
