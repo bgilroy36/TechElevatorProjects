@@ -30,6 +30,10 @@ public class VendingMachineCLI {
 		this.purchase = purchase;
 	}
 
+	public VendingMachineCLI() {
+
+	}
+
 	public Map<String, Product> getInventoryMap() {
 		return getInventoryMap();
 	}
@@ -67,48 +71,52 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 				String choice2 = (String) menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
-				if (choice2.toUpperCase() == "R");
-				{break;}
+				if (choice2.toUpperCase() == "R") ;
+				{
 
-				if (choice2.equals(SUB_MENU_FEED_MONEY)) {
-					while (true) {
-						try {
-							System.out.println("Feed Money into machine or (R)eturn to previous menu >>>");
-							String scan = userInput.nextLine();
-							if (scan.toUpperCase().equals("R")) {
-								break;
-							} else {
-								String amountEntered = (scan);
-								vendingMachine.feedMoney(Integer.parseInt(amountEntered));
+				}
 
-								System.out.println("Current Balance $" + vendingMachine.getMoneyInMachine() + ".00");
-							}
-						} catch (NumberFormatException ex) {
-							System.out.println("Please enter a valid form of currency");
-						}
-					}
-
-				} if (choice2.equals(MAIN_MENU_OPTION_EXIT)) {
-					System.exit(1);
-
-					if (choice2.equals(SUB_MENU_SELECT_PRODUCT)){
+					if (SUB_MENU_FEED_MONEY.equals(choice2)) {
 						while (true) {
 							try {
-								System.out.println("Please select the product you want using the slot location >>>");
-								String selection = userInput.nextLine();
-								//select product method where we get key and stuff
+								System.out.println("Feed Money into machine or (R)eturn to previous menu >>>");
+								String scan = userInput.nextLine();
+								if (scan.toUpperCase().equals("R")) {
+									break;
+								} else {
+									String amountEntered = (scan);
+									vendingMachine.feedMoney(Integer.parseInt(amountEntered));
+
+									System.out.println("Current Balance $" + vendingMachine.getMoneyInMachine() + ".00");
+								}
+							} catch (NumberFormatException ex) {
+								System.out.println("Please enter a valid form of currency");
 							}
 						}
+					}
+					if (choice2.equals(MAIN_MENU_OPTION_EXIT)) {
+						System.exit(1);
 
-			}
-		}
+						if (choice2.equals(SUB_MENU_SELECT_PRODUCT)) {
+							while (true) {
+								try {
+									System.out.println("Please select the product you want using the slot location >>>");
+									String selection = userInput.nextLine();
+									//select product method where we get key and stuff
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+
+						}
+					}
 
 
 //	public void displayItems() {
 //		System.out.println("Options include: " + vendingMachine.getInventory() );
 //		for (String snack : ());
 //		System.out.println();
-		//create an instance of a vending machine with a member variable of Inventory
+					//create an instance of a vending machine with a member variable of Inventory
 
 
 //	public String displayItems() {
@@ -120,8 +128,8 @@ public class VendingMachineCLI {
 //					+ display.getQuantity() + "\n";
 
 //		}
-	}
-}
+				}
+			}
 
 
 //	VendingMachine vendingMachine = new VendingMachine();
@@ -129,4 +137,5 @@ public class VendingMachineCLI {
 //	Map<String, Product> inventoryMap = vendingMachine.getInventory(file);
 
 
+		}
 	}

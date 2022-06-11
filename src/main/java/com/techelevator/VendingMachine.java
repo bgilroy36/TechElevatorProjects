@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -22,9 +24,9 @@ public class VendingMachine {
 
 
 
-
-    Inventory inventory = new Inventory;
-    VendingMachineCLI vmCLI = new VendingMachineCLI;
+    Inventory inventory = new Inventory();
+    VendingMachineCLI vmCLI = new VendingMachineCLI();
+    List<Product> shoppingCart = new ArrayList<Product>();
 
 
     public VendingMachine() {
@@ -107,12 +109,20 @@ public class VendingMachine {
 public void selectProduct() {
       if (getInventoryMap().containsKey(vmCLI.getSelection())) {
          selectedItem = getInventoryMap().get(vmCLI.getSelection());
+
           //if (vmCLI.getSelection());
       }
 
         if (inventory.hasQty() && moneyInMachine >= selectedItem.getPrice()) {
             int subtractQty = inventory.getAvailableQuantity() -1;
-        }
+            //missing something here to subtract item selected from available quantity
+            shoppingCart.add(getInventoryMap().get(vmCLI.getSelection()));
+            moneyInMachine -= selectedItem.getPrice();
+        //} else if (!selecteditem.inventory.getavailablequantity()) { sout "SOLD OUT!") break;
+            // else { sout ("insufficient balance, please insert U.S Dollars") break
+            // else { sout ("invalid option, try again");
+            //NEED TO PUT THIS FUNCTION IN VENDING MACHINE CLI
+    }
         }
 
 

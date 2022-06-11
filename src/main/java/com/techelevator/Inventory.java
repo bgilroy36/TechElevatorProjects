@@ -15,7 +15,6 @@ public class Inventory {
     private int availableQuantity;
 
 
-
     public int getMaximumAmount() {
         return MAXIMUM_AMOUNT;
     }
@@ -27,9 +26,7 @@ public class Inventory {
     File vendMachineCSV = new File("vendingmachine.csv");
 
 
-
     private Map<String, Product> inventoryMap = new TreeMap<>();
-
 
 
     public void loadInventory() {
@@ -39,7 +36,7 @@ public class Inventory {
                 String[] itemArray = invString.split("\\|");
                 Product product = new Product(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
                 inventoryMap.put(itemArray[0], product);
-               availableQuantity = MAXIMUM_AMOUNT;
+                availableQuantity = MAXIMUM_AMOUNT;
             }
 
         } catch (FileNotFoundException e) {
@@ -48,6 +45,7 @@ public class Inventory {
 
 
     }
+
     public Map<String, Product> getInventoryMap() {
         return inventoryMap;
     }
@@ -59,4 +57,6 @@ public class Inventory {
             return false;
 
 
+        }
+    }
 }
