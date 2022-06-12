@@ -10,50 +10,70 @@ public class Product {
     private double price;
     private String type;
     private String slot;
+    private int counter;
+    private String itemSound;
+
+
 //    private List<String> prodList = new ArrayList<>(); >> don't think we need it
 
 
-        public Product(String slot, String name, double price, String type) {
-            this.name = name;
-            this.price = price;
-            this.type = type;
-            this.slot = slot;
+
+
+    public Product(String slot, String name, double price, String type) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.slot = slot;
+        this.counter = 5;
+        this.itemSound = itemSound();
+
+    }
+    public String getItemSound() {
+        return itemSound;
+    }
+    public int getCounter() {
+        return counter;
+    }
+
+    public int reduceCount() {
+        counter--;
+        return counter;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSlot() {
+        return slot;
+    }
+
+    public String itemSound() {
+        if (getType().equalsIgnoreCase("Chip")) {
+            return ("Crunch Crunch, Yum!");
+        }
+        if (getType().equalsIgnoreCase("Candy")) {
+            return ("Munch Munch, Yum!");
+        }
+        if (getType().equalsIgnoreCase("Drink")) {
+            return ("Glug Glug, Yum!");
+
+        }
+        if (getType().equalsIgnoreCase("Gum")) {
+            return ("Chew Chew, Yum!");
         }
 
-
-        public String getName(){
-            return name;
-        }
-
-        public double getPrice(){
-            return price;
-        }
-
-        public String getType(){
-            return type;
-        }
-
-        public String getSlot(){
-            return slot;
-            }
-
-            public String itemSound() {
-                if (getType().equalsIgnoreCase("Chip")) {
-                    return ("Crunch Crunch, Yum!");
-                }
-                if (getType().equalsIgnoreCase("Candy")) {
-                    return ("Munch Munch, Yum!");
-                }
-                if (getType().equalsIgnoreCase("Drink")) {
-                    return ("Glug Glug, Yum!");
-
-                }
-                if (getType().equalsIgnoreCase("Gum")) {
-                    return ("Chew Chew, Yum!");
-                }
-
-                return "";
-            }
+        return "";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -80,6 +100,6 @@ public class Product {
 
     //        public List<String> getProdList() {return prodList;}
 
-    }
+}
 
 

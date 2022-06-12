@@ -8,9 +8,13 @@ import java.util.Scanner;
 public class VendingMachine {
 
     private double moneyFed;
+
+
+
     private int moneyInMachine;
     private double change;
     private double cost;
+    private String itemName;
 
     public final int QUARTER = 25;
     public final int DIME = 10;
@@ -19,13 +23,10 @@ public class VendingMachine {
     public int quarterBack = 0;
     public int dimeBack = 0;
     public int nickelBack = 0;
-    Product selectedItem;
-
-
 
 
     Inventory inventory = new Inventory();
-    VendingMachineCLI vmCLI = new VendingMachineCLI();
+    //  VendingMachineCLI vmCLI = new VendingMachineCLI();
     List<Product> shoppingCart = new ArrayList<Product>();
 
 
@@ -49,32 +50,37 @@ public class VendingMachine {
         return inventory;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
     public Map<String, Product> getInventoryMap() {
         return inventory.getInventoryMap();
     }
 
-
+    public void setMoneyInMachine(int moneyInMachine) {
+        this.moneyInMachine = moneyInMachine;
+    }
     public void setMoneyFed() {
         this.moneyFed = moneyFed;
     }
 
     public void loadInventory() {
-       inventory.loadInventory();
+        inventory.loadInventory();
     }
 
 
-
-
-    public double makeChange(double moneyFed, double cost) {
-        double dueBack = moneyFed - cost;
-        if (dueBack <= 0) {
+    public double makeChange(double moneyInMachine, double cost) {
+        change = moneyInMachine - cost;
+        if (change <= 0) {
             return 0;
         } else {
 
-            int balance = (int) (dueBack * 100);
+            int balance = (int) (change * 100);
 
             quarterBack = balance / QUARTER;
             balance = balance % QUARTER;
+            change =
 
             dimeBack = balance / DIME;
             balance = balance % DIME;
@@ -85,8 +91,9 @@ public class VendingMachine {
             System.out.println(String.format("Dispensing change, %d quarters, %d dimes, %d nickels", quarterBack, dimeBack, nickelBack));
         }
 
-        return dueBack;
+        return change;
     }
+
     public int getNewBalance() {
         return newBalance;
     }
@@ -103,30 +110,40 @@ public class VendingMachine {
             System.out.println("Thank you for inserting money: $" + moneyInserted + ".00");
 
         }
-         }
-
-
-public void selectProduct() {
-      if (getInventoryMap().containsKey(vmCLI.getSelection())) {
-         selectedItem = getInventoryMap().get(vmCLI.getSelection());
-
-          //if (vmCLI.getSelection());
-      }
-
-        if (inventory.hasQty() && moneyInMachine >= selectedItem.getPrice()) {
-            int subtractQty = inventory.getAvailableQuantity() -1;
-            //missing something here to subtract item selected from available quantity
-            shoppingCart.add(getInventoryMap().get(vmCLI.getSelection()));
-            moneyInMachine -= selectedItem.getPrice();
-        //} else if (!selecteditem.inventory.getavailablequantity()) { sout "SOLD OUT!") break;
-            // else { sout ("insufficient balance, please insert U.S Dollars") break
-            // else { sout ("invalid option, try again");
-            //NEED TO PUT THIS FUNCTION IN VENDING MACHINE CLI
     }
+
+
+    public String selectProduct(String slotKey) {
+        if (getInventoryMap().containsKey(slotKey)) {
+            Product selectedItem = getInventoryMap().get(slotKey);
+            itemName = selectedItem.getName();
+
+
+
+
+
+            if (selectedItem.getCounter() > 0 && moneyInMachine >= cost) {
+                //check if there's enough money, if yes subtract from counter and subtract money from moneyInMachine
+                //missing something here to subtract item selected from available quantity
+                shoppingCart.add(getInventoryMap().get(slotKey));
+                cost = selectedItem.getPrice();
+             double  changeAfterTransaction =  moneyInMachine - cost;
+                int updatedQty = selectedItem.getCounter();
+                String yum = selectedItem.getItemSound();
+               //******how do I call reduce cost here?*****
+                //} else if (!selecteditem.inventory.getavailablequantity()) { sout "SOLD OUT!") break;
+                // else { sout ("insufficient balance, please insert U.S Dollars") break
+                //NEED TO PUT THIS FUNCTION IN VENDING MACHINE CLI
+            } else {
+                return "Sold Out";
+            }
+            return itemName; //crunch crunch etc
         }
-
-
+        return "Invalid item key " + slotKey;
     }
+
+
+}
 
 
 
