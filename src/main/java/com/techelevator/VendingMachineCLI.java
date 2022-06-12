@@ -2,6 +2,7 @@ package com.techelevator;
 
 import com.techelevator.view.Menu;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -74,6 +75,7 @@ public class VendingMachineCLI {
                 while (subRun) {
                     // do purchase
                     String choice2 = (String) menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
+                    System.out.printf("Current Balance $%.2f %n", vendingMachine.getMoneyInMachine());
 //                if (choice2.toUpperCase() == "R") ;
 //                {
 //
@@ -88,10 +90,12 @@ public class VendingMachineCLI {
                                 break;
                             } else {
                                 String amountEntered = (scan);
-                                vendingMachine.feedMoney(Integer.parseInt(amountEntered));
-                                vendingMachine.log(scan, vendingMachine.getMoneyFed(), vendingMachine.getMoneyInMachine());
+                                double moneyInserted = Double.parseDouble(amountEntered);
+                                vendingMachine.feedMoney(moneyInserted);
+                                logMessage("Feed Money" , vendingMachine.getMoneyInMachine());
+                                System.out.printf("Thank you for inserting money: $%.2f %n", moneyInserted);
 
-                                System.out.println("Current Balance $" + vendingMachine.getMoneyInMachine() + ".00");
+                                System.out.printf("Current Balance $%.2f %n", vendingMachine.getMoneyInMachine());
                             }
                         } catch (NumberFormatException ex) {
                             System.out.println("Please enter a valid form of currency");
@@ -104,6 +108,8 @@ public class VendingMachineCLI {
                             selection = selection.toUpperCase();
                             String selectionResponse = vendingMachine.selectProduct(selection);
                             System.out.println("You have chosen " + selectionResponse );
+                            Product product = vendingMachine.getInventoryMap().get(selection);
+                            logMessage(product.getName() + " " + selection, product.getPrice());
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -122,6 +128,14 @@ public class VendingMachineCLI {
             } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                 System.exit(1);
             }
+        }
+    }
+
+    private void logMessage(String logMessage, double firstCost) {
+        try {
+            vendingMachine.log(logMessage, firstCost, vendingMachine.getMoneyInMachine());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

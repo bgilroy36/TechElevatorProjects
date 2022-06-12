@@ -15,7 +15,7 @@ public class VendingMachine {
 
 
 
-    private int moneyInMachine;
+    private double moneyInMachine;
     private double change;
     private double cost;
     private String itemName;
@@ -48,7 +48,7 @@ public class VendingMachine {
         return moneyFed;
     }
 
-    public int getMoneyInMachine() {
+    public double getMoneyInMachine() {
         return moneyInMachine;
     }
 
@@ -114,10 +114,10 @@ public class VendingMachine {
 
 
 
-    public void feedMoney(int moneyInserted) {
+    public void feedMoney( double moneyInserted) {
         if (moneyInserted >= 1) {
             this.moneyInMachine = (int) (getMoneyInMachine() + moneyInserted);
-            System.out.println("Thank you for inserting money: $" + moneyInserted + ".00");
+
 
         }
     }
@@ -139,7 +139,7 @@ public class VendingMachine {
                 //missing something here to subtract item selected from available quantity
                 shoppingCart.add(getInventoryMap().get(slotKey));
                 cost = selectedItem.getPrice();
-             double  changeAfterTransaction =  moneyInMachine - cost;
+                moneyInMachine -= cost;
                 int updatedQty = selectedItem.getCounter();
                  yum = selectedItem.getItemSound();
                //******how do I call reduce cost here?*****
@@ -152,8 +152,9 @@ public class VendingMachine {
             return itemName + "\n" + yum; //crunch crunch etc
         }
         return "Invalid item key " + slotKey;
-    } public void logTransactions() throws IOException {
-        File outputFile = new File("src/main/java/com/techelevator/SalesLog");
+    }
+    public void logTransactions() throws IOException {
+        File outputFile = new File("Log.txt");
         List<String> list = getTransactionList();
         try (FileWriter logWriter = new FileWriter(outputFile,true)) {
             for (String logLine : transactionList) {
@@ -162,10 +163,12 @@ public class VendingMachine {
             }
         }
     }
-    public List<String> log(String itemName, double moneyFed, double changeAfterTransaction) {
+    public List<String> log(String eventMessage, double moneyBeforeTransaction, double moneyAfterTransaction) throws IOException {
         LocalDateTime time = LocalDateTime.now();
-        String logLine = time + " " + itemName + " " + moneyFed + " " + changeAfterTransaction;
+        String logLine = String.format("%s %-20.20s $%.2f $%.2f", time, eventMessage, moneyBeforeTransaction, moneyAfterTransaction);
         transactionList.add(logLine);
+        logTransactions();
+        transactionList.clear();
         return transactionList;
     }
 
