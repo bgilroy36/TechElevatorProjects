@@ -1,5 +1,9 @@
 package com.techelevator;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +34,12 @@ public class VendingMachine {
     List<Product> shoppingCart = new ArrayList<Product>();
 
 
+
+    List<String> transactionList = new ArrayList<String>();
+
+    public List<String> getTransactionList() {
+        return transactionList;
+    }
     public VendingMachine() {
 
     }
@@ -117,6 +127,8 @@ public class VendingMachine {
         if (getInventoryMap().containsKey(slotKey)) {
             Product selectedItem = getInventoryMap().get(slotKey);
             itemName = selectedItem.getName();
+            String itemType = selectedItem.getType();
+            String yum = null;
 
 
 
@@ -129,7 +141,7 @@ public class VendingMachine {
                 cost = selectedItem.getPrice();
              double  changeAfterTransaction =  moneyInMachine - cost;
                 int updatedQty = selectedItem.getCounter();
-                String yum = selectedItem.getItemSound();
+                 yum = selectedItem.getItemSound();
                //******how do I call reduce cost here?*****
                 //} else if (!selecteditem.inventory.getavailablequantity()) { sout "SOLD OUT!") break;
                 // else { sout ("insufficient balance, please insert U.S Dollars") break
@@ -137,9 +149,24 @@ public class VendingMachine {
             } else {
                 return "Sold Out";
             }
-            return itemName; //crunch crunch etc
+            return itemName + "\n" + yum; //crunch crunch etc
         }
         return "Invalid item key " + slotKey;
+    } public void logTransactions() throws IOException {
+        File outputFile = new File("src/main/java/com/techelevator/SalesLog");
+        List<String> list = getTransactionList();
+        try (FileWriter logWriter = new FileWriter(outputFile,true)) {
+            for (String logLine : transactionList) {
+                logWriter.write(logLine);
+                logWriter.write("\n");
+            }
+        }
+    }
+    public List<String> log(String itemName, double moneyFed, double changeAfterTransaction) {
+        LocalDateTime time = LocalDateTime.now();
+        String logLine = time + " " + itemName + " " + moneyFed + " " + changeAfterTransaction;
+        transactionList.add(logLine);
+        return transactionList;
     }
 
 

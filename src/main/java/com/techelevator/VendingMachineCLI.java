@@ -89,6 +89,7 @@ public class VendingMachineCLI {
                             } else {
                                 String amountEntered = (scan);
                                 vendingMachine.feedMoney(Integer.parseInt(amountEntered));
+                                vendingMachine.log(scan, vendingMachine.getMoneyFed(), vendingMachine.getMoneyInMachine());
 
                                 System.out.println("Current Balance $" + vendingMachine.getMoneyInMachine() + ".00");
                             }
