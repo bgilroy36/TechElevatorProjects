@@ -13,27 +13,25 @@ public class Product {
     private int counter;
     private String itemSound;
 
-
-//    private List<String> prodList = new ArrayList<>(); >> don't think we need it
-
-
-
-
+    //product constructor
     public Product(String slot, String name, double price, String type) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.slot = slot;
+        //always same, doesn't have to be parameter
         this.counter = 5;
         this.itemSound = itemSound();
 
     }
+    //these are our getters
     public String getItemSound() {
         return itemSound;
     }
     public int getCounter() {
         return counter;
     }
+
 
     public int reduceCount() {
         counter--;
@@ -57,18 +55,19 @@ public class Product {
         return slot;
     }
 
+    //methods for itemSound - used if statement instead of loop
     public String itemSound() {
-        if (getType().equalsIgnoreCase("Chip")) {
+        if (getType().equals("Chip")) {
             return ("Crunch Crunch, Yum!");
         }
-        if (getType().equalsIgnoreCase("Candy")) {
+        if (getType().equals("Candy")) {
             return ("Munch Munch, Yum!");
         }
-        if (getType().equalsIgnoreCase("Drink")) {
+        if (getType().equals("Drink")) {
             return ("Glug Glug, Yum!");
 
         }
-        if (getType().equalsIgnoreCase("Gum")) {
+        if (getType().equals("Gum")) {
             return ("Chew Chew, Yum!");
         }
 

@@ -118,7 +118,7 @@ public class VendingMachineCLI {
                     else if (choice2.equals(SUB_MENU_FINISH_TRANSACTION)) {
                         subRun = false;
                         double dueBack = vendingMachine.getChange();
-                        System.out.println(vendingMachine.makeChange(vendingMachine.getMoneyInMachine(), vendingMachine.getCost()));
+                        System.out.println(" Your change is: " + vendingMachine.makeChange(dueBack, vendingMachine.getCost()));
                         vendingMachine.setMoneyInMachine(0);
                         System.out.println("Your balance is now " + vendingMachine.getMoneyInMachine());
                         //return change, ask the vending machine for the change and print it out
