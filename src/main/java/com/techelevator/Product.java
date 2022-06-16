@@ -13,7 +13,7 @@ public class Product {
     private int counter;
     private String itemSound;
 
-    //product constructor
+
     public Product(String slot, String name, double price, String type) {
         this.name = name;
         this.price = price;

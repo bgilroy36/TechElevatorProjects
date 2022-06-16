@@ -158,9 +158,6 @@ public class VendingMachineCLI {
 }
 
 
-//	VendingMachine vendingMachine = new VendingMachine();
-//	File file = vendingMachine.getInventory().vendMachineCSV;
-//	Map<String, Product> inventoryMap = vendingMachine.getInventory(file);
 
 
 
